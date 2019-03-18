@@ -347,8 +347,18 @@ void g_keyboard::switchLayout() {
 			key++;
 		}
 	} 
-
-	g_logger::log("Shift status " + statusShift + " Alt status " + statusAlt);
+	
+	if(statusShift) {
+		g_logger::log("Shift status true");
+	} else {
+		g_logger::log("Shift status false");
+	}
+	
+	if(statusAlt) {
+		g_logger::log("Alt status true");
+	} else {
+		g_logger::log("Alt status false");
+	}
 
 	if (g_keyboard::loadLayout(layout[key])) {
 		g_logger::log("keyboard layout '" + layout[key] + "' loaded");
