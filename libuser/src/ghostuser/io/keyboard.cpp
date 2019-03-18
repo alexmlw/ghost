@@ -336,3 +336,25 @@ bool g_keyboard::loadConversionLayout(std::string iso) {
 	return true;
 }
 
+void g_keyboard::switchLayout() {
+	std::string layout[] = {"de-DE", "en-US"};
+	int key = 0;
+
+	if(statusShift && statusAlt) {
+		if(key == 1){
+			key = 0;
+		} else {
+			key++;
+		}
+	} 
+
+	g_logger::log("Shift status " + statusShift + " Alt status " + statusAlt);
+
+	if (g_keyboard::loadLayout(layout[key])) {
+		g_logger::log("keyboard layout '" + layout[key] + "' loaded");
+	} else {
+		g_logger::log("unable to load keyboard layout '" + layout[key] + "'");
+		return;
+	}
+
+}

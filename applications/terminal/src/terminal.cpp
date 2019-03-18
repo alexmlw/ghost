@@ -105,13 +105,7 @@ void terminal_t::prepare() {
 	}
 
 	// load keyboard layout
-	std::string initialLayout = "de-DE";
-	if (g_keyboard::loadLayout(initialLayout)) {
-		g_logger::log("keyboard layout '" + initialLayout + "' loaded");
-	} else {
-		g_logger::log("unable to load keyboard layout '" + initialLayout + "'");
-		return;
-	}
+	g_keyboard::loadLayout(g_keyboard::switchLayout());
 
 	// disable video logging
 	g_set_video_log(false);
