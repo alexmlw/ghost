@@ -286,6 +286,7 @@ void terminal_t::run(create_terminal_info_t* inf) {
 
 	bool write_header = true;
 	while (true) {
+		g_keyboard::switchLayout();
 		// wait for activity
 		g_atomic_block(&inactive);
 		screen->updateCursor();
