@@ -102,7 +102,7 @@ public:
 	static bool loadLayout(std::string iso);
 	static bool loadScancodeLayout(std::string iso);
 	static bool loadConversionLayout(std::string iso);
-	static std::string switchLayout();
+	static void switchLayout();
 };
 
 #endif
