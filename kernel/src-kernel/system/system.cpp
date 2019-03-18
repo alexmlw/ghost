@@ -21,7 +21,7 @@
 #include <system/system.hpp>
 #include <logger/logger.hpp>
 #include <system/acpi/acpi.hpp>
-#include <system/acpi/MADT.hpp>
+#include <system/acpi/madt.hpp>
 #include <system/interrupts/pic.hpp>
 #include <system/interrupts/lapic.hpp>
 #include <system/interrupts/ioapic.hpp>
