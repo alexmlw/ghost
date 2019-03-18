@@ -90,6 +90,7 @@ public:
 class g_keyboard {
 private:
 	static void registerKeyboard();
+	int key = 0;
 
 public:
 	static g_key_info readKey(bool* break_condition = nullptr);

@@ -340,7 +340,6 @@ bool g_keyboard::loadConversionLayout(std::string iso) {
 
 void g_keyboard::switchLayout() {
 	std::string layout[] = {"de-DE", "en-US"};
-	int key = 0;
 
 	if(statusShift && statusAlt) {
 		if(key == 1){
@@ -348,18 +347,6 @@ void g_keyboard::switchLayout() {
 		} else {
 			key++;
 		}
-	} 
-	
-	if(statusShift) {
-		g_logger::log("Shift status true");
-	} else {
-		g_logger::log("Shift status false");
-	}
-	
-	if(statusAlt) {
-		g_logger::log("Alt status true");
-	} else {
-		g_logger::log("Alt status false");
 	}
 
 	if (g_keyboard::loadLayout(layout[key])) {
