@@ -138,6 +138,8 @@ bool g_keyboard::keyForScancode(uint8_t scancode, g_key_info* out) {
 	out->shift = statusShift;
 	out->alt = statusAlt;
 
+	switchLayout();
+
 	return true;
 }
 
