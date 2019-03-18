@@ -24,7 +24,7 @@
 #include <kernel.hpp>
 #include <utils/string.hpp>
 #include <memory/address_space.hpp>
-#include <system/acpi/MADT.hpp>
+#include <system/acpi/madt.hpp>
 #include "ghost/types.h"
 
 /**

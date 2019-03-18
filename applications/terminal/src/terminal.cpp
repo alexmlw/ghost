@@ -105,7 +105,7 @@ void terminal_t::prepare() {
 	}
 
 	// load keyboard layout
-	g_keyboard::loadLayout(g_keyboard::switchLayout());
+	g_keyboard::switchLayout();
 
 	// disable video logging
 	g_set_video_log(false);

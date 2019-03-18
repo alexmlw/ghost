@@ -26,7 +26,7 @@
 #include "ghost/types.h"
 #include <system/acpi/acpi_table_header.hpp>
 #include <system/acpi/acpi_entry.hpp>
-#include <system/acpi/RSDP.hpp>
+#include <system/acpi/rsdp.hpp>
 
 // Set a maximum for SDTs to avoid problems with possible junk tables
 #define	G_SDT_MAXIMUM_BYTES		0x10000
