@@ -24,6 +24,7 @@
 #include <stdint.h>
 #include <string>
 #include <sstream>
+#include <stdlib.h>
 
 /**
  *
@@ -39,6 +40,14 @@ struct g_key_info_basic {
 			pressed(false), ctrl(false), alt(false), shift(false), scancode(0) {
 	}
 }__attribute__((packed));
+
+struct g_layoutKeyboard{
+	size_t id;
+	std::string layout;
+
+	bool switchStatus;
+	struct layoutKeyboard* NEXT;
+};
 
 /**
  *
@@ -87,10 +96,10 @@ public:
 /**
  *
  */
+
 class g_keyboard {
 private:
 	static void registerKeyboard();
-	static int key = 0;
 
 public:
 	static g_key_info readKey(bool* break_condition = nullptr);
@@ -103,6 +112,18 @@ public:
 	static bool loadLayout(std::string iso);
 	static bool loadScancodeLayout(std::string iso);
 	static bool loadConversionLayout(std::string iso);
+	static void switchLayout(size_t key);
+};
+
+class g_switchKeyboard {
+private:
+	static g_layoutKeyboard layoutKeyboard;
+	
+	static bool getStatus();	
+	static void setStatus(bool logic);
+
+public:
+	static void init();
 	static void switchLayout();
 };
 

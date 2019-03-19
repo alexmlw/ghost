@@ -138,8 +138,10 @@ bool g_keyboard::keyForScancode(uint8_t scancode, g_key_info* out) {
 	out->shift = statusShift;
 	out->alt = statusAlt;
 
-	switchLayout();
-
+	if(statusShift && statusAlt && !g_switchKeyboard::getStatus){
+		g_switchKeyboard::switchLayout();
+	}
+	
 	return true;
 }
 
@@ -200,7 +202,7 @@ std::string g_keyboard::getCurrentLayout() {
 bool g_keyboard::loadScancodeLayout(std::string iso) {
 
 	// Clear layout and parse file
-	std::ifstream in("/system/keyboard/" + iso + ".layout");
+	std::ifstream in("/system/keyboard/layout/" + iso + ".layout");
 	if (!in.good()) {
 		return false;
 	}
@@ -261,7 +263,7 @@ bool g_keyboard::loadConversionLayout(std::string iso) {
 	std::stringstream conversionLayoutStream;
 
 	// Clear layout and parse file
-	std::ifstream in("/system/keyboard/" + iso + ".conversion");
+	std::ifstream in("/system/keyboard/conversion/" + iso + ".conversion");
 	if (!in.good()) {
 		return false;
 	}
@@ -338,22 +340,34 @@ bool g_keyboard::loadConversionLayout(std::string iso) {
 	return true;
 }
 
-void g_keyboard::switchLayout() {
-	std::string layout[] = {"de-DE", "en-US"};
+void g_switchKeyboard::init() {
+	std::ifstream conf("/system/keyboard/config.cfg");
+	if (!conf.good()) {
+		g_logger::log("Error load keyboard configure file \"config.cfg\".");
 
-	if(statusShift && statusAlt) {
-		if(key == 1){
-			key = 0;
-		} else {
-			key++;
-		}
+	} else {
+		g_logger::log("Keyboard configure file load.");
+
 	}
 
-	if (g_keyboard::loadLayout(layout[key])) {
-		g_logger::log("keyboard layout '" + layout[key] + "' loaded");
+	setStatus(false);
+	conf.close();
+};
+
+bool g_switchKeyboard.getStatus() {
+	return layoutKeyboard.switchStatus;
+}
+
+void g_switchKeyboard.setStatus(bool logic) {
+	layoutKeyboard.switchStatus = logic;
+}
+
+void g_switchKeyboard::switchLayout() {
+
+	if (g_keyboard::loadLayout(layoutKeyboard.layout)) {
+		g_logger::log("keyboard layout '" + layoutKeyboard.layout + "' loaded");
 	} else {
-		g_logger::log("unable to load keyboard layout '" + layout[key] + "'");
-		return;
+		g_logger::log("unable to load keyboard layout '" + layoutKeyboard.layout + "'");
 	}
 
 }
