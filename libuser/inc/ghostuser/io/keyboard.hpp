@@ -119,11 +119,11 @@ class g_switchKeyboard {
 private:
 	static g_layoutKeyboard layoutKeyboard;
 	
-	static bool getStatus();	
 	static void setStatus(bool logic);
 
 public:
 	static void init();
+	static bool getStatus();	
 	static void switchLayout();
 };
 
