@@ -114,7 +114,6 @@ public:
 	static bool loadLayout(std::string iso);
 	static bool loadScancodeLayout(std::string iso);
 	static bool loadConversionLayout(std::string iso);
-	static void switchLayout(size_t key);
 };
 
 class g_switchKeyboard {

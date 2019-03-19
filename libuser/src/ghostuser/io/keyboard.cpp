@@ -375,4 +375,5 @@ void g_switchKeyboard::switchLayout() {
 		g_logger::log("unable to load keyboard layout '" + layoutKeyboard.layout + "'");
 	}
 
+	setStatus = true;
 }
