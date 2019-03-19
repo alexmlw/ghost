@@ -19,8 +19,8 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #include <vbe_driver.hpp>
-#include <ghostuser/graphics/VBE.hpp>
-#include <ghostuser/utils/Logger.hpp>
+#include <ghostuser/graphics/vbe.hpp>
+#include <ghostuser/utils/logger.hpp>
 #include <ghost.h>
 #include <stdint.h>
 #include <string.h>
