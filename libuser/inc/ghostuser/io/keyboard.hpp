@@ -49,6 +49,16 @@ struct g_layoutKeyboard{
 	struct layoutKeyboard* NEXT;
 };
 
+struct g_layoutKeyboard{
+	size_t id;
+	std::string layout;
+
+	bool switchStatus;
+	struct g_layoutKeyboard* NEXT;
+};
+
+static g_layoutKeyboard* layoutKeyboard;
+
 /**
  *
  */
@@ -116,14 +126,12 @@ public:
 };
 
 class g_switchKeyboard {
-private:
-	static g_layoutKeyboard layoutKeyboard;
-	
+private:	
 	static void setStatus(bool logic);
 
 public:
-	static void init();
 	static bool getStatus();	
+	static void init();
 	static void switchLayout();
 };
 

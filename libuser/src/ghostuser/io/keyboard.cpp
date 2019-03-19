@@ -341,7 +341,9 @@ bool g_keyboard::loadConversionLayout(std::string iso) {
 }
 
 void g_switchKeyboard::init() {
-	std::ifstream conf("/system/keyboard/config.cfg");
+	g_layoutKeyboard tmpStruct;
+
+	std::ifstream conf("config.cfg");
 	if (!conf.good()) {
 		g_logger::log("Error load keyboard configure file \"config.cfg\".");
 
@@ -350,16 +352,19 @@ void g_switchKeyboard::init() {
 
 	}
 
+
+
+	layoutKeyboard = &tmpStruct;
 	setStatus(false);
 	conf.close();
 };
 
-bool g_switchKeyboard.getStatus() {
-	return layoutKeyboard.switchStatus;
+bool g_switchKeyboard::getStatus() {
+	return layoutKeyboard->switchStatus;
 }
 
-void g_switchKeyboard.setStatus(bool logic) {
-	layoutKeyboard.switchStatus = logic;
+void g_switchKeyboard::setStatus(bool logic) {
+	layoutKeyboard->switchStatus = logic;
 }
 
 void g_switchKeyboard::switchLayout() {
