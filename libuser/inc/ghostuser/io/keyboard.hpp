@@ -46,14 +46,6 @@ struct g_layoutKeyboard{
 	std::string layout;
 
 	bool switchStatus;
-	struct layoutKeyboard* NEXT;
-};
-
-struct g_layoutKeyboard{
-	size_t id;
-	std::string layout;
-
-	bool switchStatus;
 	struct g_layoutKeyboard* NEXT;
 };
 
