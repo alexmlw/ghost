@@ -47,6 +47,26 @@ static bool have_last_unknown_key = false;
 /**
  *
  */
+
+void g_keyboard::init() {
+	g_layoutKeyboard tmpStruct;
+
+	std::ifstream conf("config.cfg");
+	if (!conf.good()) {
+		g_logger::log("Error load keyboard configure file \"config.cfg\".");
+
+	} else {
+		g_logger::log("Keyboard configure file load.");
+
+	}
+
+
+
+	ptrKeyLayout = &tmpStruct;
+	setStatus(false);
+	conf.close();
+};
+
 g_key_info g_keyboard::readKey(bool* break_condition) {
 
 	if (!g_ps2_is_registered) {
@@ -339,25 +359,6 @@ bool g_keyboard::loadConversionLayout(std::string iso) {
 
 	return true;
 }
-
-void g_switchKeyboard::init() {
-	g_layoutKeyboard tmpStruct;
-
-	std::ifstream conf("config.cfg");
-	if (!conf.good()) {
-		g_logger::log("Error load keyboard configure file \"config.cfg\".");
-
-	} else {
-		g_logger::log("Keyboard configure file load.");
-
-	}
-
-
-
-	layoutKeyboard = &tmpStruct;
-	setStatus(false);
-	conf.close();
-};
 
 bool g_switchKeyboard::getStatus() {
 	return layoutKeyboard->switchStatus;

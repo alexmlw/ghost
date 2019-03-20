@@ -49,7 +49,7 @@ struct g_layoutKeyboard{
 	struct g_layoutKeyboard* NEXT;
 };
 
-static g_layoutKeyboard* layoutKeyboard;
+static g_layoutKeyboard* ptrKeyLayout;
 
 /**
  *
@@ -104,6 +104,9 @@ private:
 	static void registerKeyboard();
 
 public:
+
+	static void init();
+
 	static g_key_info readKey(bool* break_condition = nullptr);
 
 	static bool keyForScancode(uint8_t scancode, g_key_info* out);
@@ -122,8 +125,8 @@ private:
 	int couter = 0;
 public:
 	static bool getStatus();	
-	static void init();
 	static void switchLayout();
 };
 
 #endif
+ 
