@@ -138,7 +138,7 @@ bool g_keyboard::keyForScancode(uint8_t scancode, g_key_info* out) {
 	out->shift = statusShift;
 	out->alt = statusAlt;
 
-	if(statusShift && statusAlt && !g_switchKeyboard::getStatus){
+	if(out->shift && out->alt){
 		g_switchKeyboard::switchLayout();
 	}
 	
@@ -369,11 +369,20 @@ void g_switchKeyboard::setStatus(bool logic) {
 
 void g_switchKeyboard::switchLayout() {
 
+	if (setStatus) {
+		std::string initialLayout = "de-DE";
+	} else {
+		std::string initialLayout = "en-US";
+	}
+
 	if (g_keyboard::loadLayout(layoutKeyboard.layout)) {
 		g_logger::log("keyboard layout '" + layoutKeyboard.layout + "' loaded");
 	} else {
 		g_logger::log("unable to load keyboard layout '" + layoutKeyboard.layout + "'");
 	}
 
-	setStatus = true;
+	counter++;
+	g_logger::log("Switch was user %d" + counter + "time");
+
+	setStatus = ~setStatus;
 }

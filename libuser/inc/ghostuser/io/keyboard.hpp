@@ -119,7 +119,7 @@ public:
 class g_switchKeyboard {
 private:	
 	static void setStatus(bool logic);
-
+	int couter = 0;
 public:
 	static bool getStatus();	
 	static void init();
