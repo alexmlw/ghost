@@ -51,7 +51,7 @@ static bool have_last_unknown_key = false;
 void g_keyboard::init() {
 	g_layoutKeyboard tmpStruct;
 
-	std::ifstream conf("config.cfg");
+	std::ifstream conf("/system/keyboard/config.cfg");
 	if (!conf.good()) {
 		g_logger::log("Error load keyboard configure file \"config.cfg\".");
 
@@ -63,8 +63,12 @@ void g_keyboard::init() {
 
 
 	ptrKeyLayout = &tmpStruct;
-	setStatus(false);
-	conf.close();
+	g_switchKeyboard::setStatus(false);
+	g_switchKeyboard::switchLayout();
+	//conf.close();
+
+
+	//g_switchKeyboard::couter = 0;
 };
 
 g_key_info g_keyboard::readKey(bool* break_condition) {
@@ -361,29 +365,31 @@ bool g_keyboard::loadConversionLayout(std::string iso) {
 }
 
 bool g_switchKeyboard::getStatus() {
-	return layoutKeyboard->switchStatus;
+	return ptrKeyLayout->switchStatus;
 }
 
 void g_switchKeyboard::setStatus(bool logic) {
-	layoutKeyboard->switchStatus = logic;
+	ptrKeyLayout->switchStatus = logic;
 }
 
 void g_switchKeyboard::switchLayout() {
 
+	std::string layout;
+
 	if (setStatus) {
-		std::string initialLayout = "de-DE";
+		layout = "de-DE";
 	} else {
-		std::string initialLayout = "en-US";
+		layout = "en-US";
 	}
 
-	if (g_keyboard::loadLayout(layoutKeyboard.layout)) {
-		g_logger::log("keyboard layout '" + layoutKeyboard.layout + "' loaded");
+	if (g_keyboard::loadLayout(layout)) {
+		g_logger::log("keyboard layout '" + layout + "' loaded");
 	} else {
-		g_logger::log("unable to load keyboard layout '" + layoutKeyboard.layout + "'");
+		g_logger::log("unable to load keyboard layout '" + layout + "'");
 	}
 
-	counter++;
-	g_logger::log("Switch was user %d" + counter + "time");
+	//g_switchKeyboard::couter++;
+	//g_logger::log("Switch was user %d" + *(char*)couter + "time");
 
-	setStatus = ~setStatus;
+	//ptrKeyLayout->switchStatus = ~ptrKeyLayout->switchStatus;
 }

@@ -121,9 +121,10 @@ public:
 
 class g_switchKeyboard {
 private:	
-	static void setStatus(bool logic);
-	int couter = 0;
 public:
+	static void setStatus(bool logic);
+	static int couter;
+	
 	static bool getStatus();	
 	static void switchLayout();
 };
