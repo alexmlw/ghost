@@ -20,6 +20,7 @@
 
 #include <ghost.h>
 #include <ghostuser/utils/logger.hpp>
+#include <ghostuser/io/keyboard.hpp>
 
 /**
  *
@@ -28,7 +29,7 @@ int main(int argc, char** argv) {
 
 	g_task_register_id("init");
 
-	
+
 	g_logger::log("Initialized keyboard");
 	g_keyboard::init();
 
