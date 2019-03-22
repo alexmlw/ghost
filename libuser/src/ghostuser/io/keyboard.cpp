@@ -63,6 +63,8 @@ void g_keyboard::init() {
 	g_switchKeyboard::setStatus(false);
 	ptrKeyLayout->layout = "de-DE";
 	conf.close();
+	g_logger::log("Keyboard " + ptrKeyLayout->layout + "!");
+
 
 
 	//g_switchKeyboard::couter = 0;
