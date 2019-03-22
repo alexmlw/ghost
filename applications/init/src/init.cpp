@@ -49,9 +49,6 @@ int main(int argc, char** argv) {
 	g_pid ls_pid;
 	std::string launch_srv_path = "/applications/launch.bin";
 
-	g_logger::log("Initialized keyboard");
-	g_keyboard::init();
-
 	g_spawn_status stat = g_spawn_p(launch_srv_path.c_str(), "/system/launch/init", "/", G_SECURITY_LEVEL_KERNEL, &ls_pid);
 	if (stat == G_SPAWN_STATUS_SUCCESSFUL) {
 		g_logger::log("launch service executed in process %i", ls_pid);

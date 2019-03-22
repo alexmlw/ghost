@@ -50,6 +50,9 @@ static bool headless;
  */
 int main(int argc, char* argv[]) {
 
+	g_logger::log("Initialized keyboard");
+	g_keyboard::init();
+	
 	// check for headless argument
 	headless = (strcmp("--headless", argv[1]) == 0);
 
@@ -106,7 +109,7 @@ void terminal_t::prepare() {
 
 	// load keyboard layout
 	std::string initialLayout = g_keyboard::getCurrentLayout();
-	if (!g_keyboard::loadLayout(g_keyboard::getCurrentLayout())) {
+	if (!g_keyboard::loadLayout(initialLayout)) {
 		g_logger::log("Terminal: Failed to load keyboard layout: " + initialLayout);
 		return;
 	}
