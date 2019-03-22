@@ -50,8 +50,8 @@ static bool headless;
  */
 int main(int argc, char* argv[]) {
 
-	g_logger::log("Initialized keyboard");
-	g_keyboard::init();
+	// g_logger::log("Initialized keyboard");
+	// g_keyboard::init();
 
 	// check for headless argument
 	headless = (strcmp("--headless", argv[1]) == 0);

@@ -28,6 +28,10 @@ int main(int argc, char** argv) {
 
 	g_task_register_id("init");
 
+	
+	g_logger::log("Initialized keyboard");
+	g_keyboard::init();
+
 	// load spawner process
 	g_ramdisk_spawn_status spawner_stat = g_ramdisk_spawn("applications/spawner.bin", G_SECURITY_LEVEL_KERNEL);
 	if (spawner_stat != G_RAMDISK_SPAWN_STATUS_SUCCESSFUL) {
