@@ -50,9 +50,6 @@ static bool headless;
  */
 int main(int argc, char* argv[]) {
 
-	// g_logger::log("Initialized keyboard");
-	// g_keyboard::init();
-
 	// check for headless argument
 	headless = (strcmp("--headless", argv[1]) == 0);
 
@@ -105,6 +102,13 @@ void terminal_t::prepare() {
 	if (headless) {
 		g_task_register_id("terminal_headless");
 		klog("initializing headless terminal");
+	}
+
+	// load keyboard layout
+	std::string initialLayout = ptrKeyLayout->layout;
+	if (!g_keyboard::loadLayout(initialLayout)) {
+		g_logger::log("Terminal: Failed to load keyboard layout: " + initialLayout);
+		return;
 	}
 
 	// disable video logging

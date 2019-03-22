@@ -61,7 +61,6 @@ void g_keyboard::init() {
 
 
 	g_switchKeyboard::setStatus(false);
-	g_switchKeyboard::switchLayout();
 	conf.close();
 
 
