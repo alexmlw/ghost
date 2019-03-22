@@ -62,7 +62,7 @@ void terminal_t::execute() {
 	screen->clean();
 
 	// load keyboard layout
-	std::string initialLayout = "de-DE";
+	std::string initialLayout = ptrKeyLayout->layout;
 	if (!g_keyboard::loadLayout(initialLayout)) {
 		g_logger::log("Terminal: Failed to load keyboard layout: " + initialLayout);
 		return;

@@ -371,12 +371,10 @@ void g_switchKeyboard::setStatus(bool logic) {
 
 void g_switchKeyboard::switchLayout() {
 
-	std::string layout;
-
 	if (g_switchKeyboard::getStatus()) {
-		layout = "de-DE";
+		ptrKeyLayout->layout = "de-DE";
 	} else {
-		layout = "en-US";
+		ptrKeyLayout->layout = "en-US";
 	}
 
 	if (g_switchKeyboard::getStatus()) {
@@ -385,10 +383,10 @@ void g_switchKeyboard::switchLayout() {
 		g_switchKeyboard::setStatus(true);
 	}
 
-	if (g_keyboard::loadLayout(layout)) {
-		g_logger::log("keyboard layout '" + layout + "' loaded");
+	if (g_keyboard::loadLayout(ptrKeyLayout->layout)) {
+		g_logger::log("keyboard layout '" + ptrKeyLayout->layout + "' loaded");
 	} else {
-		g_logger::log("unable to load keyboard layout '" + layout + "'");
+		g_logger::log("unable to load keyboard layout '" + ptrKeyLayout->layout + "'");
 	}
 
 	//g_switchKeyboard::couter++;
