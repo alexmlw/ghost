@@ -88,7 +88,7 @@ void windowserver_t::launch() {
 	event_processor = new event_processor_t();
 	input_receiver_t::initialize();
 
-	std::string keyLayout = ptrKeyLayout->layout;
+	std::string keyLayout = g_keyboard::getCurrentLayout();
 	klog(("loading keyboard layout '" + keyLayout + "'").c_str());
 	if (!g_keyboard::loadLayout(keyLayout)) {
 		klog(("failed to load keyboard layout '" + keyLayout + "', no keyboard input available").c_str());

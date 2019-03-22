@@ -206,7 +206,6 @@ char g_keyboard::charForKey(g_key_info info) {
  */
 bool g_keyboard::loadLayout(std::string iso) {
 	if (loadScancodeLayout(iso) && loadConversionLayout(iso)) {
-		currentLayout = iso;
 		return true;
 	}
 	return false;
@@ -216,7 +215,7 @@ bool g_keyboard::loadLayout(std::string iso) {
  *
  */
 std::string g_keyboard::getCurrentLayout() {
-	return currentLayout;
+	return ptrKeyLayout->layout;
 }
 
 /**
