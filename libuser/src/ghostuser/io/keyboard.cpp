@@ -49,8 +49,6 @@ static bool have_last_unknown_key = false;
  */
 
 void g_keyboard::init() {
-	g_layoutKeyboard tmpStruct;
-
 	std::ifstream conf("/system/keyboard/config.cfg");
 	if (!conf.good()) {
 		g_logger::log("Error load keyboard configure file \"config.cfg\".");
@@ -62,7 +60,6 @@ void g_keyboard::init() {
 
 
 
-	ptrKeyLayout = &tmpStruct;
 	g_switchKeyboard::setStatus(false);
 	g_switchKeyboard::switchLayout();
 	conf.close();
