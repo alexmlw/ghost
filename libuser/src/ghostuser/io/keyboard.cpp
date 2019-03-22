@@ -382,6 +382,12 @@ void g_switchKeyboard::switchLayout() {
 		layout = "en-US";
 	}
 
+	if (g_switchKeyboard::getStatus()) {
+		g_logger::log("Switch status True!");
+	} else {
+		g_logger::log("Switch status False!");
+	}
+
 	if (g_keyboard::loadLayout(layout)) {
 		g_logger::log("keyboard layout '" + layout + "' loaded");
 	} else {
