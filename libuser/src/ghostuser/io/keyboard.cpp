@@ -376,7 +376,7 @@ void g_switchKeyboard::switchLayout() {
 
 	std::string layout;
 
-	if (setStatus) {
+	if (this.getStatus()) {
 		layout = "de-DE";
 	} else {
 		layout = "en-US";
@@ -391,5 +391,5 @@ void g_switchKeyboard::switchLayout() {
 	//g_switchKeyboard::couter++;
 	//g_logger::log("Switch was user %d" + *(char*)couter + "time");
 
-	//ptrKeyLayout->switchStatus = ~ptrKeyLayout->switchStatus;
+	this.setStatus(~this.getStatus());
 }
