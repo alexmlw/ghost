@@ -49,7 +49,7 @@ struct g_layoutKeyboard{
 	struct g_layoutKeyboard* NEXT;
 };
 
-g_layoutKeyboard* ptrKeyLayout = new g_layoutKeyboard;
+static g_layoutKeyboard* ptrKeyLayout = new g_layoutKeyboard;
 
 /**
  *
