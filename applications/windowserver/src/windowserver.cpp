@@ -61,10 +61,7 @@ static uint64_t total_blitting = 0;
 /**
  *
  */
-int main(int argc, char** argv) {
-
-	g_keyboard::init();
-	
+int main(int argc, char** argv) {	
 	server = new windowserver_t();
 	server->launch();
 	return 0;
