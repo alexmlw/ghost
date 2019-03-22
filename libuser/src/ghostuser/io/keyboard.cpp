@@ -65,7 +65,7 @@ void g_keyboard::init() {
 	ptrKeyLayout = &tmpStruct;
 	g_switchKeyboard::setStatus(false);
 	g_switchKeyboard::switchLayout();
-	//conf.close();
+	conf.close();
 
 
 	//g_switchKeyboard::couter = 0;
