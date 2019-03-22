@@ -383,9 +383,9 @@ void g_switchKeyboard::switchLayout() {
 	}
 
 	if (g_switchKeyboard::getStatus()) {
-		g_logger::log("Switch status True!");
+		g_switchKeyboard::setStatus(false);
 	} else {
-		g_logger::log("Switch status False!");
+		g_switchKeyboard::setStatus(true);
 	}
 
 	if (g_keyboard::loadLayout(layout)) {
@@ -397,5 +397,4 @@ void g_switchKeyboard::switchLayout() {
 	//g_switchKeyboard::couter++;
 	//g_logger::log("Switch was user %d" + *(char*)couter + "time");
 
-	g_switchKeyboard::setStatus(~g_switchKeyboard::getStatus());
 }
