@@ -106,7 +106,7 @@ void terminal_t::prepare() {
 
 	// load keyboard layout
 	std::string initialLayout = g_keyboard::getCurrentLayout();
-	if (!g_keyboard::loadLayout(initialLayout)) {
+	if (!g_keyboard::loadLayout(g_keyboard::getCurrentLayout())) {
 		g_logger::log("Terminal: Failed to load keyboard layout: " + initialLayout);
 		return;
 	}

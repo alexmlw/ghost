@@ -226,6 +226,7 @@ bool g_keyboard::loadScancodeLayout(std::string iso) {
 	// Clear layout and parse file
 	std::ifstream in("/system/keyboard/layout/" + iso + ".layout");
 	if (!in.good()) {
+		g_logger::log("layout false");
 		return false;
 	}
 	g_property_file_parser props(in);
@@ -287,6 +288,7 @@ bool g_keyboard::loadConversionLayout(std::string iso) {
 	// Clear layout and parse file
 	std::ifstream in("/system/keyboard/conversion/" + iso + ".conversion");
 	if (!in.good()) {
+		g_logger::log("conversion false");
 		return false;
 	}
 	g_property_file_parser props(in);
