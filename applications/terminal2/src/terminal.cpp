@@ -32,6 +32,9 @@
  */
 int main(int argc, char* argv[]) {
 
+	g_logger::log("Initialized keyboard");
+	g_keyboard::init();
+	
 	// process command line arguments
 	bool headless = false;
 
