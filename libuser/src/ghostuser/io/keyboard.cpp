@@ -30,6 +30,7 @@
 #include <map>
 #include <fstream>
 #include <stdio.h>
+#include <malloc.h>
 
 static bool statusCtrl = false;
 static bool statusShift = false;
@@ -47,6 +48,50 @@ static bool have_last_unknown_key = false;
 /**
  *
  */
+
+
+
+std::string to_hex(int numb){
+	char conv[4] = "0x";
+	int i = 0;
+
+	while(numb){
+		switch(numb & 15){
+			case 10: 
+				conv[9 - i] = 'A';
+				break;
+			case 11: 
+				conv[9 - i] = 'B';
+				break;
+			case 12: 
+				conv[9 - i] = 'C';
+				break;
+			case 13: 
+				conv[9 - i] = 'D';
+				break;
+			case 14: 
+				conv[9 - i] = 'E';
+				break;
+			case 15: 
+				conv[9 - i] = 'F';
+				break;
+			default:
+				conv[9 - i] = 48 + (numb & 15);
+				break;
+		}
+		i++;
+		numb >>= 4;
+	}
+	while(i < 8){
+		conv[9 - i] = '0';
+		i++;
+	}
+	return conv;
+}
+
+
+
+
 
 void g_keyboard::init() {
 	std::ifstream conf("/system/keyboard/config.cfg");
@@ -82,8 +127,8 @@ g_key_info g_keyboard::readKey(bool* break_condition) {
 	if (g_atomic_block_to(&g_ps2_area->keyboard.buffer_empty_lock, 10000) == false) {
 
 		// keyboard pipe is non-blocking
-		uint8_t scancode[1];
-		if (g_read(g_ps2_keyboard_pipe, scancode, 1) > 0) {
+		uint8_t scancode;
+		if (g_read(g_ps2_keyboard_pipe, &scancode, 1) > 0) {
 
 			// decrease buffer counter
 			g_atomic_lock(&g_ps2_area->keyboard.buffer_amount_lock);
@@ -95,7 +140,7 @@ g_key_info g_keyboard::readKey(bool* break_condition) {
 
 			// read and convert data
 			g_key_info info;
-			if (keyForScancode(scancode[0], &info)) {
+			if (keyForScancode(scancode, &info)) {
 				return info;
 			}
 		}
@@ -117,9 +162,16 @@ bool g_keyboard::keyForScancode(uint8_t scancode, g_key_info* out) {
 	if (have_last_unknown_key) {
 		int compoundScancode = last_unknown_key.scancode << 8 | out->scancode;
 
+		g_logger::log(to_hex(compoundScancode) + " - compoundScancode");
+		g_logger::log(to_hex((int)out->scancode) + " - out->scancode");
+		g_logger::log(to_hex((int)last_unknown_key.scancode) + " - last_unknown_key.scancode");
+
 		// Try to find a compound key
 		auto pos = scancodeLayout.find(compoundScancode);
 		if (pos != scancodeLayout.end()) {
+
+			g_logger::log("scancodeLayout find");
+
 			out->key = pos->second;
 			out->scancode = compoundScancode;
 			found_compound = true;
@@ -130,9 +182,13 @@ bool g_keyboard::keyForScancode(uint8_t scancode, g_key_info* out) {
 	// When it is no compound
 	if (!found_compound) {
 
+		g_logger::log("!found_compound");
+
 		// Try to find the normal key
 		auto pos = scancodeLayout.find(out->scancode);
 		if (pos == scancodeLayout.end()) {
+
+			g_logger::log(pos->second + " pos == scancodeLayout.end()");
 
 			// If it's not found, this might be the start of a compound
 			have_last_unknown_key = true;
