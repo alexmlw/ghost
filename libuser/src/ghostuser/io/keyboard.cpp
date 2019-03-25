@@ -155,21 +155,15 @@ bool g_keyboard::keyForScancode(uint8_t scancode, g_key_info* out) {
 	// Get "pressed" info from scancode
 	out->pressed = !(scancode & (1 << 7));
 	out->scancode = scancode & ~(1 << 7); // remove 7th bit
-
+	g_logger::log(to_hex(scancode) + " - scancode");
 	// Get key from layout map
 	bool found_compound = false;
 	if (have_last_unknown_key) {
 		int compoundScancode = last_unknown_key.scancode << 8 | out->scancode;
 
-		g_logger::log(to_hex(compoundScancode) + " - compoundScancode");
-		g_logger::log(to_hex((int)out->scancode) + " - out->scancode");
-		g_logger::log(to_hex((int)last_unknown_key.scancode) + " - last_unknown_key.scancode");
-
 		// Try to find a compound key
 		auto pos = scancodeLayout.find(compoundScancode);
 		if (pos != scancodeLayout.end()) {
-
-			g_logger::log("scancodeLayout find");
 
 			out->key = pos->second;
 			out->scancode = compoundScancode;
@@ -181,13 +175,9 @@ bool g_keyboard::keyForScancode(uint8_t scancode, g_key_info* out) {
 	// When it is no compound
 	if (!found_compound) {
 
-		g_logger::log("!found_compound");
-
 		// Try to find the normal key
 		auto pos = scancodeLayout.find(out->scancode);
 		if (pos == scancodeLayout.end()) {
-
-			g_logger::log(pos->second + " pos == scancodeLayout.end()");
 
 			// If it's not found, this might be the start of a compound
 			have_last_unknown_key = true;
