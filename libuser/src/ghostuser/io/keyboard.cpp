@@ -30,7 +30,6 @@
 #include <map>
 #include <fstream>
 #include <stdio.h>
-#include <malloc.h>
 
 static bool statusCtrl = false;
 static bool statusShift = false;
@@ -52,7 +51,7 @@ static bool have_last_unknown_key = false;
 
 
 std::string to_hex(int numb){
-	char conv[4] = "0x";
+	char conv[10] = "0x";
 	int i = 0;
 
 	while(numb){
