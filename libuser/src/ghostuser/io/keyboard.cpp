@@ -51,8 +51,8 @@ static bool have_last_unknown_key = false;
 
 
 std::string to_hex(int numb){
-	char conv[10] = "0x";
-	int i = 0;
+	char conv[11] = "0x";
+	int i = 1;
 
 	while(numb){
 		switch(numb & 15){
@@ -85,6 +85,9 @@ std::string to_hex(int numb){
 		conv[9 - i] = '0';
 		i++;
 	}
+
+	conv[10] = '\0';
+	
 	return conv;
 }
 
