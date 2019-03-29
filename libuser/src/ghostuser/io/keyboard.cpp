@@ -51,42 +51,38 @@ static bool have_last_unknown_key = false;
 
 
 std::string to_hex(int numb){
-	char conv[11] = "0x";
-	int i = 1;
+	char conv[5] = "0x";
+    int i = 1;
 
-	while(numb){
-		switch(numb & 15){
-			case 10: 
-				conv[9 - i] = 'A';
-				break;
-			case 11: 
-				conv[9 - i] = 'B';
-				break;
-			case 12: 
-				conv[9 - i] = 'C';
-				break;
-			case 13: 
-				conv[9 - i] = 'D';
-				break;
-			case 14: 
-				conv[9 - i] = 'E';
-				break;
-			case 15: 
-				conv[9 - i] = 'F';
-				break;
-			default:
-				conv[9 - i] = 48 + (numb & 15);
-				break;
-		}
-		i++;
-		numb >>= 4;
-	}
-	while(i < 8){
-		conv[9 - i] = '0';
-		i++;
-	}
+    while(i < 3){
+        switch(numb & 15){
+            case 10: 
+                conv[4 - i] = 'A';
+                break;
+            case 11: 
+                conv[4 - i] = 'B';
+                break;
+            case 12: 
+                conv[4 - i] = 'C';
+                break;
+            case 13: 
+                conv[4 - i] = 'D';
+                break;
+            case 14: 
+                conv[4 - i] = 'E';
+                break;
+            case 15: 
+                conv[4 - i] = 'F';
+                break;
+            default:
+                conv[4 - i] = 48 + (numb & 15);
+                break;
+        }
+        i++;
+        numb >>= 4;
+    }
 
-	conv[10] = '\0';
+    conv[4] = '\0';
 	
 	return conv;
 }
@@ -158,7 +154,17 @@ bool g_keyboard::keyForScancode(uint8_t scancode, g_key_info* out) {
 	// Get "pressed" info from scancode
 	out->pressed = !(scancode & (1 << 7));
 	out->scancode = scancode & ~(1 << 7); // remove 7th bit
+
+	// out->pressed = scancode == 0xE0 ? 0 : 1;
+	
 	g_logger::log(to_hex(scancode) + " - scancode");
+	
+	// if (!out->pressed) {
+	// 	return false;
+	// }
+
+	// out->scancode = scancode;
+	
 	// Get key from layout map
 	bool found_compound = false;
 	if (have_last_unknown_key) {
@@ -439,8 +445,4 @@ void g_switchKeyboard::switchLayout() {
 	} else {
 		g_logger::log("unable to load keyboard layout '" + ptrKeyLayout->layout + "'");
 	}
-
-	//g_switchKeyboard::couter++;
-	//g_logger::log("Switch was user %d" + *(char*)couter + "time");
-
 }
