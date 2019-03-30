@@ -48,49 +48,6 @@ static bool have_last_unknown_key = false;
  *
  */
 
-
-
-std::string to_hex(int numb){
-	char conv[5] = "0x";
-    int i = 1;
-
-    while(i < 3){
-        switch(numb & 15){
-            case 10: 
-                conv[4 - i] = 'A';
-                break;
-            case 11: 
-                conv[4 - i] = 'B';
-                break;
-            case 12: 
-                conv[4 - i] = 'C';
-                break;
-            case 13: 
-                conv[4 - i] = 'D';
-                break;
-            case 14: 
-                conv[4 - i] = 'E';
-                break;
-            case 15: 
-                conv[4 - i] = 'F';
-                break;
-            default:
-                conv[4 - i] = 48 + (numb & 15);
-                break;
-        }
-        i++;
-        numb >>= 4;
-    }
-
-    conv[4] = '\0';
-	
-	return conv;
-}
-
-
-
-
-
 void g_keyboard::init() {
 	std::ifstream conf("/system/keyboard/config.cfg");
 	if (!conf.good()) {
@@ -157,7 +114,7 @@ bool g_keyboard::keyForScancode(uint8_t scancode, g_key_info* out) {
 
 	// out->pressed = scancode == 0xE0 ? 0 : 1;
 	
-	g_logger::log(to_hex(scancode) + " - scancode");
+	g_logger::message(scancode, " - scancode");
 	
 	// if (!out->pressed) {
 	// 	return false;

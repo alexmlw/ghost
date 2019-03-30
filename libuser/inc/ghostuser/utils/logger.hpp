@@ -31,6 +31,7 @@
  */
 class g_logger {
 public:
+	static void message(int numb, std::string message);
 	static void log(std::string message, ...);
 	static void log(const char* message, ...);
 	static void log(const char* message, va_list l);
