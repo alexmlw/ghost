@@ -112,15 +112,7 @@ bool g_keyboard::keyForScancode(uint8_t scancode, g_key_info* out) {
 	out->pressed = !(scancode & (1 << 7));
 	out->scancode = scancode & ~(1 << 7); // remove 7th bit
 
-	// out->pressed = scancode == 0xE0 ? 0 : 1;
-	
 	g_logger::message(scancode, " - scancode");
-	
-	// if (!out->pressed) {
-	// 	return false;
-	// }
-
-	// out->scancode = scancode;
 	
 	// Get key from layout map
 	bool found_compound = false;
