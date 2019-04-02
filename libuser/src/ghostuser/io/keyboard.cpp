@@ -61,7 +61,7 @@ void g_keyboard::init() {
 
 
 	g_switchKeyboard::setStatus(false);
-	ptrKeyLayout->layout = "de-DE";
+	ptrKeyLayout->layout = "en-US";
 	conf.close();
 	g_logger::log("Keyboard " + ptrKeyLayout->layout + "!");
 
@@ -378,7 +378,7 @@ void g_switchKeyboard::setStatus(bool logic) {
 void g_switchKeyboard::switchLayout() {
 
 	if (g_switchKeyboard::getStatus()) {
-		ptrKeyLayout->layout = "de-DE";
+		ptrKeyLayout->layout = "ru-RU";
 	} else {
 		ptrKeyLayout->layout = "en-US";
 	}
