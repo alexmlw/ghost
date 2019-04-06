@@ -168,6 +168,7 @@ target_all() {
 	target_link $ARTIFACT_KERNEL $LINKSCRIPT_KERNEL "$OBJ_KERNEL/* $OBJ_SHARED/*"
 	target_ramdisk
 	target_make_iso
+	target_qemu
 }
 
 target_repack() {

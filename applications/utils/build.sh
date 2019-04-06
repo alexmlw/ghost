@@ -1,7 +1,7 @@
 #!/bin/sh
-sh echo.sh $1
-sh ls.sh $1
-sh reverse.sh $1
-sh lines.sh $1
-sh read.sh $1
-sh write.sh $1
+bash echo.sh $1
+bash ls.sh $1
+bash reverse.sh $1
+bash lines.sh $1
+bash read.sh $1
+bash write.sh $1
