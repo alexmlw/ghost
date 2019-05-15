@@ -6,6 +6,7 @@
 export AUTOCONF=autoconf2.64
 
 #export DIR_INSTALL=`pwd`
+export DIR_INSTALL=/opt
 export TOOLCHAIN_BASE=$DIR_INSTALL/ghost
 
 
