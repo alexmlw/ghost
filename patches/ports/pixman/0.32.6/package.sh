@@ -10,5 +10,6 @@ port_install() {
 	export PKG_CONFIG=i686-ghost-pkg-config.sh
 	../$UNPACKED_DIR/configure --host=$HOST --prefix=$PREFIX
 	make
-	make DESTDIR=$SYSROOT install
+	make DESTDIR=$INSTALL_DIR install
+	sudo cp -r $INSTALL_DIR/* $SYSROOT  
 }

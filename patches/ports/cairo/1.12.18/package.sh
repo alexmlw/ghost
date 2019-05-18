@@ -10,5 +10,6 @@ port_install() {
 	export PKG_CONFIG=i686-ghost-pkg-config.sh
 	CFLAGS="-DCAIRO_NO_MUTEX=1" ../$UNPACKED_DIR/configure --host=$HOST --prefix=$PREFIX --enable-xlib=no
 	make
-	make DESTDIR=$SYSROOT install
+	make DESTDIR=$INSTALL_DIR install
+	sudo cp -r $INSTALL_DIR/* $SYSROOT 
 }

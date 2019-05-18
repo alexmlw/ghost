@@ -9,5 +9,6 @@ port_unpack() {
 port_install() {
 	../$UNPACKED_DIR/configure --host=$HOST --prefix=$PREFIX
 	make
-	make DESTDIR=$SYSROOT install
+	make DESTDIR=$INSTALL_DIR install
+	sudo cp -r $INSTALL_DIR/* $SYSROOT  
 }

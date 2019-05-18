@@ -6,7 +6,8 @@ echo "=========="
 
 PACKAGE="$1"
 BUILD_ROOT="build"
-SYSROOT=/ghost/sysroot
+INSTALL_ROOT="install"
+SYSROOT=/opt/ghost/sysroot
 HOST=i686-ghost
 PREFIX=/system
 REQUIRES_INSTALL_IN_SOURCE_DIR=0
@@ -58,6 +59,12 @@ if [ ! -d "$BUILD_ROOT" ]; then
 	mkdir "$BUILD_ROOT"
 fi
 
+#make sure working directory exists
+if [ ! -d "$INSTALL_ROOT"]; then
+    echo "> creating empty build directory at '$INSTALL_DIR'"
+    mkdir "$INSTALL_ROOT"
+fi 
+
 # check if port exists
 if [ ! -d "$PACKAGE" ]; then
 	fail "port not found!"
@@ -71,6 +78,13 @@ if [ -d "$BUILD_DIR" ]; then
 fi
 mkdir -p "$BUILD_DIR"
 
+# set & clear working directory for build
+INSTALL_DIR="`pwd`/$INSTALL_ROOT/$PACKAGE"
+echo "> cleaning install directory '$INSTALL_DIR'"
+if [ -d "$INSTALL_DIR"]; then
+    rm -rf "INSTALL_DIR"
+fi
+mkdir -p "$INSTALL_DIR"
 
 # check required port parts
 if [ ! -f "$PACKAGE/package.sh" ]; then
@@ -124,11 +138,12 @@ else
 	mkdir "build"
 	cd "build"
 fi
-port_install | sed 's/^/    /'
+port_install | sed 's/^/   /'
 cd $BACK
 
 # clean up
 rm -rf $BUILD_ROOT/$PACKAGE
+rm -rf $INSTALL_ROOT/$PACKAGE
 
 # finish successfully
 exit 0

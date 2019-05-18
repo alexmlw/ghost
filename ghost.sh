@@ -108,7 +108,7 @@ with CROSS_LD			$CROSS_PREFIX"ld"
 with CROSS_GAS			$CROSS_PREFIX"as"
 with CROSS_AR			$CROSS_PREFIX"ar"
 
-with TOOLCHAIN_BASE		"/ghost"
+with TOOLCHAIN_BASE		"/opt/ghost"
 with SYSROOT			$TOOLCHAIN_BASE"/sysroot"
 
 with NASM				nasm
