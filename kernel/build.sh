@@ -131,7 +131,7 @@ target_link() {
 
 target_ramdisk() {
 	headline "building ramdisk"
-	$RAMDISK_WRITER "$SYSROOT" "$RAMDISK"
+	$RAMDISK_WRITER "$SYSGHOST" "$RAMDISK"
 	failOnError
 }
 

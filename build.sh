@@ -9,12 +9,17 @@ popd() {
     command popd "$@" > /dev/null
 }
 
-if [ ! -d $SYSGHOST ]; then
-    echo "Create ghost dir"
-    mkdir $SYSGHOST
-    cp -r $SYSROOT/* $SYSGHOST
-    cp -r ../sysroot/* $SYSGHOST
+# Remove ghost dir
+if [ -d $SYSGHOST ]; then
+    echo "Removing ghost dir"
+    rm -rf $SYSGHOST
 fi
+
+# Create ghost dir
+echo "Create ghost dir"
+mkdir $SYSGHOST
+cp -r $SYSROOT/* $SYSGHOST
+cp -r ../sysroot/* $SYSGHOST
 
 # Prepare C++ library
 echo "Building libuser"
