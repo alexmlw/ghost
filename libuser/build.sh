@@ -81,7 +81,7 @@ target_install() {
 	cp $ARTIFACT_LOCAL $ARTIFACT_TARGET
 	
 	# c'mon
-	chmod -R 777 $SYSROOT
+	#chmod -R 777 $SYSGHOST
 }
 
 

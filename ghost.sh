@@ -110,6 +110,7 @@ with CROSS_AR			$CROSS_PREFIX"ar"
 
 with TOOLCHAIN_BASE		"/opt/ghost"
 with SYSROOT			$TOOLCHAIN_BASE"/sysroot"
+with SYSGHOST			"../sysghost"
 
 with NASM				nasm
 with SH					bash
